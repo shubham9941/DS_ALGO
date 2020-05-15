@@ -2,23 +2,44 @@ package pract.queue.medium;
 
 import pract.Reader;
 
+import java.util.Deque;
+import java.util.LinkedList;
+import java.util.Queue;
+
 public class MaximumOfAllSubArraysOfSize_K {
+
+    static void push(int[] arr, int i, Deque<Integer> q) {
+        if (q.isEmpty()) {
+            q.addLast(i);
+        } else if (arr[q.getLast()] > arr[i]) {
+            q.addLast(i);
+        } else {
+            q.removeLast();
+            push(arr, i, q);
+        }
+    }
+
+    static void siftWindow(int removalIndex, Deque<Integer> q, int[] arr) {
+        System.out.print(arr[q.peek()] + " ");
+        if (q.peek() == removalIndex) {
+            q.remove();
+        }
+
+    }
+
     static void printDataByWindow(int[] arr, int n, int k) {
+        Deque<Integer> q = new LinkedList<>();
         int i = 0;
-        StringBuilder sb = new StringBuilder();
-        int max = Integer.MIN_VALUE;
         for (; i < k; i++) {
-            if (arr[i] > max)
-                max = arr[i];
+            push(arr, i, q);
         }
-        sb.append(max + " ");
         for (; i < n; i++) {
-            if(arr[i] > max){
-                max = arr[i];
-            }
-            sb.append(max + " ");
+            siftWindow(i - k, q, arr);
+            push(arr, i, q);
         }
-        System.out.println(sb);
+        if (!q.isEmpty()) {
+            System.out.print(arr[q.peek()]);
+        }
     }
 
     public static void main(String[] args) throws Exception {
