@@ -34,17 +34,15 @@ public class PriorityQueueImpl {
 
     private boolean sink(int pos) {
         int j = pos * 2;
-        if (j >= size)
+        if (j > size)
             return true;
-        else {
+        else if (j < size) {
             j = (queue[j] > queue[j + 1]) ? j : j + 1;
-            if (queue[j] > queue[pos]){
-                swap(queue, j, pos);
-                return sink(j);
-            }
-
-            else return true;
         }
+        if (queue[j] > queue[pos]){
+            swap(queue, j, pos);
+            return sink(j);
+        } else return true;
     }
 
     public boolean add(int v) {
@@ -58,32 +56,36 @@ public class PriorityQueueImpl {
             return bubbleUp(size);
     }
 
-    public void remove(int v) {
+    public void remove() {
+//        System.out.println("Before removing size = " + size);
         if(size == 0 )
             throw new RuntimeException("No more element exist in queue");
         swap(queue , 1 , size);
+        System.out.print(queue[size] + " ");
         size--;
         sink(1);
 
     }
 
     public void printAll() {
-        for(int i  = 1 ; i <= size ; i ++){
-            System.out.print(queue[i] + " ");
+        int to = size;
+        for(int i  = 1 ; i <= to ; i ++){
+//            System.out.print(queue[i] + " ");
+            remove();
         }
     }
 
     public static void main(String[] args) {
-//        PriorityQueueImpl queue = new PriorityQueueImpl(10);
-        PriorityQueue queue = new PriorityQueue(10);
-        queue.add(1);
+        PriorityQueueImpl queue = new PriorityQueueImpl(4);
+//        PriorityQueue queue = new PriorityQueue(10);
+        queue.add(4);
         queue.add(2);
         queue.add(3);
-        queue.add(4);
-        queue.add(5);
-        queue.add(6);
-        System.out.println(queue);
-//        queue.printAll();
+        queue.add(1);
+//        queue.add(5);
+//        queue.add(6);
+//        System.out.println(queue);
+        queue.printAll();
 
     }
 }
