@@ -1,5 +1,7 @@
 package pract.bst.easy;
 
+import java.util.Arrays;
+
 public class LowestCommonAncestor {
     static class Node {
         int data;
@@ -23,4 +25,6 @@ public class LowestCommonAncestor {
         }
         return root;
     }
+
+
 }

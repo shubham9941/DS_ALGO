@@ -23,6 +23,7 @@ public class InfixToPostFix {
     }
 
     void pushAccordingPriority(char c, Stack<Character> stk) {
+//        System.out.println("c = " + c);
         if (stk.empty() || stk.peek() == '(') {
             stk.push(c);
         } else {
@@ -61,6 +62,7 @@ public class InfixToPostFix {
         }
 
         while (!stk.empty()) {
+            System.out.println("-----");
             System.out.print(stk.pop());
         }
     }

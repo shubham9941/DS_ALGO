@@ -83,19 +83,21 @@ public class DetectCycleInDirectedGraph {
             if (isCyclicUsingBFS(i, visited)) {
                 return 1;
             }
+            System.out.println("For i " + i );
             visited[i] = 0;
+            System.out.println(Arrays.toString(visited));
         }
         return 0;
     }
 
     public static void main(String[] args) {
 
-        DetectCycleInDirectedGraph obj = new DetectCycleInDirectedGraph(22);
+        DetectCycleInDirectedGraph obj = new DetectCycleInDirectedGraph(4);
 
-//        obj.addEdge(6,21);
-        obj.addEdge(17,12);
-//        obj.addEdge(2,11);
-//        obj.addEdge(9,11);
+        obj.addEdge(0,1);
+        obj.addEdge(1,2);
+        obj.addEdge(2,3);
+        obj.addEdge(3,1);
 
         System.out.println(obj.detectCycleUsingBFS());
 

@@ -1,8 +1,10 @@
 package pract.array.easy;
 
-import java.util.Arrays;
+import java.io.*;
+        import java.util.*;
 
-public class PairOfElements {
+class SwappingPairsMakeSumEqual
+{
     // Function to calculate sum of elements of array
     static int getSum(int X[], int n)
     {
@@ -35,6 +37,8 @@ public class PairOfElements {
         // Note that target can be negative
         int target = getTarget(A, n, B, m);
 
+        System.out.println(">>>> target >>> " + target);
+
         // target 0 means, answer is not possible
         if (target == 0)
             return;
@@ -42,11 +46,7 @@ public class PairOfElements {
         int i = 0, j = 0;
         while (i < n && j < m)
         {
-            System.out.println(">>target>>>" + target);
-            System.out.println("A[i] = " + A[i]);
-            System.out.println("B[i] = " + B[j]);
             int diff = A[i] - B[j];
-            System.out.println("Diff " + diff);
             if (diff == target)
             {
                 System.out.println(A[i]+" "+B[i]);
@@ -66,12 +66,14 @@ public class PairOfElements {
     // driver program
     public static void main (String[] args)
     {
-        int A[] = { 4, 1, 2, 1, 1, 2, 8};
+
+        int A[] = {5, 7, 4, 6}, B[] = {1, 2, 3, 8} ;
+
         int n = A.length;
-        int B[] = { 3, 6, 3, 3 };
         int m = B.length;
 
         // Call to function
         findSwapValues(A, n, B, m);
     }
 }
+

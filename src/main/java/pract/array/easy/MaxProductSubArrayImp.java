@@ -20,8 +20,7 @@ package pract.array.easy;
 public class MaxProductSubArrayImp {
 
     // Function to find maximum product subarray
-    static int maxProduct(int arr[], int n)
-    {
+    static int maxProduct(int arr[], int n) {
 
         // Variables to store maximum and minimum
         // product till ith index.
@@ -30,17 +29,15 @@ public class MaxProductSubArrayImp {
 
         int maxProduct = arr[0];
 
-        for (int i = 1; i < n; i++)
-        {
+        for (int i = 1; i < n; i++) {
 
             // When multiplied by -ve number,
             // maxVal becomes minVal
             // and minVal becomes maxVal.
-            if (arr[i] < 0)
-            {
+            if (arr[i] < 0) {
                 int temp = maxVal;
                 maxVal = minVal;
-                minVal =temp;
+                minVal = temp;
 
             }
 
@@ -50,6 +47,7 @@ public class MaxProductSubArrayImp {
             minVal = Math.min(arr[i], minVal * arr[i]);
 
             // Max Product of array.
+            System.out.println("for i = "+  i + " Max = " + maxVal + " MinValue = " + minVal);
             maxProduct = Math.max(maxProduct, maxVal);
         }
 
@@ -57,13 +55,17 @@ public class MaxProductSubArrayImp {
         return maxProduct;
     }
 
+
+
     // Driver Code
-    public static void main (String[] args)
-    {
-        int arr[] = { -1, -3, -10, 0, 60 };
+    public static void main(String[] args) {
+        int arr[] = {-2, -3, 0, -2, -40};
+//        int arr[] = {1, 2, 0, 30};
         int n = arr.length;
 
-        System.out.println( "Maximum Subarray product is "
+        System.out.println("Maximum Subarray product is "
                 + maxProduct(arr, n));
+//
+//        System.out.println(maxPro(arr, n));
     }
 }

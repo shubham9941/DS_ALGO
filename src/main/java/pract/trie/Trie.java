@@ -5,9 +5,9 @@ import java.util.TreeMap;
 
 public class Trie {
 
-     TrieNode root;
+    static TrieNode root;
 
-     class TrieNode {
+    class TrieNode {
         Map<Character, TrieNode> childs;
         int count = 0;
         boolean isEndOfWord;
@@ -18,7 +18,7 @@ public class Trie {
         }
     }
 
-    public  void insert(String str) {
+    public void insert(String str) {
         if (root == null) {
             root = new TrieNode();
         }
@@ -34,7 +34,34 @@ public class Trie {
         current.isEndOfWord = true;
     }
 
-     boolean search(String str) {
+    public void insertWithRemovePrefix(String str) {
+        if (root == null) {
+            root = new TrieNode();
+        }
+        TrieNode current = root;
+        for (int i = 0; i < str.length(); i++) {
+            char c = str.charAt(i);
+            if (!current.childs.containsKey(c)) {
+                current.childs.put(c, new TrieNode());
+            }
+            current = current.childs.get(c);
+            current.isEndOfWord = false;
+        }
+        if (current.childs.size() == 0) {
+            current.isEndOfWord = true;
+        }
+    }
+
+    void printOnlyEndOfWords(TrieNode root, String keys) {
+        if (root.isEndOfWord) {
+            System.out.println(keys);
+        }
+        root.childs.forEach((key, node) -> {
+            printOnlyEndOfWords(node, keys + key);
+        });
+    }
+
+    boolean search(String str) {
         TrieNode current = root;
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
@@ -49,7 +76,7 @@ public class Trie {
     }
 
 
-    public  int boggleSearch(String str) {
+    public int boggleSearch(String str) {
         TrieNode current = root;
         for (int i = 0; i < str.length(); i++) {
             char c = str.charAt(i);
@@ -59,14 +86,13 @@ public class Trie {
                 return -1;
             }
         }
-        if(current.isEndOfWord){
+        if (current.isEndOfWord) {
             return 1;
-        }
-        else return 0;
+        } else return 0;
 
     }
 
-     private void printAllWords(TrieNode root, String keys) {
+    private void printAllWords(TrieNode root, String keys) {
         if (root.isEndOfWord) {
             System.out.println(keys);
         }
@@ -75,7 +101,7 @@ public class Trie {
         });
     }
 
-     void printAutoSuggestions(String str) {
+    void printAutoSuggestions(String str) {
         TrieNode current = root;
         boolean isWordFound = true;
         for (int i = 0; i < str.length(); i++) {
@@ -96,24 +122,23 @@ public class Trie {
     }
 
     // Find longest common prefix
-     String findLCP() {
+    String findLCP() {
         StringBuilder sb = new StringBuilder();
         TrieNode current = root;
 
-        int MAX_COUNT  = Integer.MIN_VALUE;
+        int MAX_COUNT = Integer.MIN_VALUE;
 
         while (current.childs.size() == 1) {
 
-            Map.Entry<Character, TrieNode> current_node_info  = current.childs.entrySet().stream().findFirst().get();
+            Map.Entry<Character, TrieNode> current_node_info = current.childs.entrySet().stream().findFirst().get();
             char key = current_node_info.getKey();
             TrieNode childNode = current_node_info.getValue();
 
-            if(childNode.count >= MAX_COUNT){
+            if (childNode.count >= MAX_COUNT) {
                 MAX_COUNT = childNode.count;
                 sb.append(key);
                 current = childNode;
-            }
-            else{
+            } else {
                 break;
             }
         }
@@ -137,10 +162,19 @@ public class Trie {
     public static void main(String[] args) {
 
         Trie trie = new Trie();
-        trie.insert("he");
-        trie.insert("help");
-        trie.insert("hell");
-        trie.insert("hello");
+        trie.insertWithRemovePrefix("apple");
+        trie.insertWithRemovePrefix("app");
+        trie.insertWithRemovePrefix("there");
+        trie.insertWithRemovePrefix("the");
+        trie.insertWithRemovePrefix("like");
+
+        trie.printOnlyEndOfWords(root, "");
+
+
+//        trie.insert("he");
+//        trie.insert("help");
+//        trie.insert("hell");
+//        trie.insert("hello");
 //        insert("dog");
 //        insert("cat");
 //        insert("a");
@@ -148,7 +182,7 @@ public class Trie {
 //        insert("helping");
 //        System.out.print(boggleSearch("q"));
 
-        System.out.println(trie.findLCP()) ;
+//        System.out.println(trie.findLCP());
 //
 //        System.out.println(search("lm"));
 //        System.out.println(preFixSearch("lmt"));

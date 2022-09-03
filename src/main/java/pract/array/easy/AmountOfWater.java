@@ -37,6 +37,8 @@ public class AmountOfWater {
         return calculate(arr, i, size, 0);
     }
 
+
+
     //GEEKS solution
     static int findWater(int[] arr, int n) {
         // left[i] contains height of tallest bar to the

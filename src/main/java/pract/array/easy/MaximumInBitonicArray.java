@@ -21,6 +21,34 @@ public class MaximumInBitonicArray {
         } else return -1;
     }
 
+    static int easyWayUtil(int[]arr , int i , int j){
+        if(i > j){
+            return -1;
+        }
+        int mid = (i + j) / 2;
+        if(arr[mid] > arr[mid-1] && arr[mid] > arr[mid+1]){
+            return arr[mid];
+        }
+        else if(arr[mid] < arr[mid+1]){
+            return easyWayUtil(arr , mid+1 , j);
+        }
+        else if (arr[mid] > arr[mid+1]){
+            return easyWayUtil(arr , i , mid-1);
+        }
+        return -1;
+    }
+
+    static int easyWay(int[]arr, int i , int j){
+        int res = easyWayUtil(arr , i+1 , j-1);
+        if(res == -1 && arr[j] > arr[j-1]){
+            return arr[j];
+        }
+        return res;
+    }
+
+
+
+
     public static void main(String[] args) throws Exception {
         Reader sc = new Reader();
         int testCases = sc.nextInt();
@@ -30,7 +58,8 @@ public class MaximumInBitonicArray {
             for (int i = 0; i < size; i++) {
                 arr[i] = sc.nextInt();
             }
-            System.out.println(getMax(arr, 0, size - 1, size));
+//            System.out.println(getMax(arr, 0, size - 1, size));
+            System.out.println(easyWay(arr, 0, size - 1));
         }
     }
 }

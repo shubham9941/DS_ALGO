@@ -56,6 +56,8 @@ public class MinimumSpanningTree {
         return (root(i) == root(j));
     }
 
+
+
     void connect(int i, int j) {
         subset[root(i)] = root(j);
     }
@@ -70,6 +72,27 @@ public class MinimumSpanningTree {
             if (!isConnected(elem.src, elem.dest)) {
                 e++;
                 connect(elem.src, elem.dest);
+                result[r++] = elem;
+            }
+        }
+        for(int i = 0 ; i < result.length ; i++){
+            System.out.println(result[i].src+" -- " +
+                    result[i].dest+" == " + result[i].weight);
+        }
+    }
+
+    void KruskalMST2() {
+        Edge[] result = new Edge[V - 1];
+        boolean [] isVisited = new boolean[V];
+        PriorityQueue<Edge> pq = new PriorityQueue<>(Arrays.asList(edge));
+        int e = 0;
+        int r = 0;
+        while (e < V - 1 && !pq.isEmpty()) {
+            Edge elem = pq.poll();
+            if (!(isVisited[elem.src] && isVisited[elem.dest])) {
+                e++;
+                isVisited[elem.src] = true;
+                isVisited[elem.dest] = true;
                 result[r++] = elem;
             }
         }
@@ -111,7 +134,7 @@ public class MinimumSpanningTree {
         graph.edge[4].dest = 3;
         graph.edge[4].weight = 4;
 
-        graph.KruskalMST();
+        graph.KruskalMST2();
 
 
 

@@ -52,20 +52,51 @@ public class SpirallyTraversingMatrix {
         }
     }
 
-    public static void main(String[] args) throws Exception {
-
-        Reader sc = new Reader();
-        int testCases = sc.nextInt();
-        while (testCases-- > 0) {
-            int m = sc.nextInt();
-            int n = sc.nextInt();
-            int[][] arr = new int[m][n];
-            for (int i = 0; i < m; i++) {
-                for (int j = 0; j < n; j++) {
-                    arr[i][j] = sc.nextInt();
+    static void simple(int[][] arr, int startRow, int endRow, int startCol, int endCol) {
+        if (!(startRow > endRow || startCol > endCol)) {
+            for (int j = startCol; j <= endCol; j++) {
+                System.out.print(arr[startRow][j] + " ");
+            }
+            for (int i = startRow + 1; i <= endRow; i++) {
+                System.out.print(arr[i][endCol] + " ");
+            }
+            if (startRow != endRow) {
+                for (int j = endCol - 1; j >= startCol; j--) {
+                    System.out.print(arr[endRow][j] + " ");
                 }
             }
-            printSpirallyMatrix(arr, 0, 0, m - 1, n - 1, "j", true, new StringBuilder());
+            if (startCol != endCol) {
+                for (int i = endRow - 1; i > startRow; i--) {
+                    System.out.print(arr[i][startCol] + " ");
+                }
+            }
+
+            simple(arr, startRow + 1, endRow - 1, startCol + 1, endCol - 1);
         }
+    }
+
+    public static void main(String[] args) throws Exception {
+
+//        Reader sc = new Reader();
+//        int testCases = sc.nextInt();
+//        while (testCases-- > 0) {
+//            int m = sc.nextInt();
+//            int n = sc.nextInt();
+//            int[][] arr = new int[m][n];
+//            for (int i = 0; i < m; i++) {
+//                for (int j = 0; j < n; j++) {
+//                    arr[i][j] = sc.nextInt();
+//                }
+//            }
+//            printSpirallyMatrix(arr, 0, 0, m - 1, n - 1, "j", true, new StringBuilder());
+//        }
+
+        int[][] arr = {
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        };
+        simple(arr, 0, 2, 0, 2);
+
     }
 }

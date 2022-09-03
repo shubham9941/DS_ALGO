@@ -16,6 +16,8 @@ Output: No such triplet exists.
 
 */
 
+import java.util.Arrays;
+
 public class SortedSubSequence {
 
     static void find3Numbers(int arr[]) {
@@ -67,16 +69,9 @@ public class SortedSubSequence {
         // both greater number on right
         // side and smaller number on left side
 
-
-        for (int sm : smaller) {
-            System.out.println("sm -> " + sm);
-        }
-
+        System.out.println("smaller = " + Arrays.toString(smaller));
+        System.out.println("greater = " + Arrays.toString(greater));
         System.out.println();
-
-        for (int lg : greater) {
-            System.out.println("lg -> " + lg);
-        }
 
 
         for (i = 0; i < n; i++) {
@@ -105,7 +100,8 @@ public class SortedSubSequence {
 
 
     public static void main(String[] args) {
-        int[] arr = {4,5,1,2,3};
+//        int[] arr = {4,5,1,2,3};
+        int[] arr = {25,50,1,2,3};
 //        int[] arr = {12, 11, 10, 5, 6, 2, 30};
         find3Numbers(arr);
 //        find3Num(arr , arr.length);

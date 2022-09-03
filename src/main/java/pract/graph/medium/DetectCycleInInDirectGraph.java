@@ -23,6 +23,8 @@ public class DetectCycleInInDirectGraph {
     }
 
     boolean isCyclicUsingDFS(int str, int p, boolean[] visited) {
+        System.out.println("str = " + str);
+        System.out.println("p = " + p);
         visited[str] = true;
 
         Iterator<Integer> it = adj[str].iterator();
@@ -52,6 +54,7 @@ public class DetectCycleInInDirectGraph {
         boolean[] visited = new boolean[totalV];
         for (int i = 0; i < totalV; i++) {
             if (!visited[i]) {
+                System.out.println("i = " + i );
                 if (isCyclicUsingDFS(i, -1, visited)) {
                     return 1;
                 }
@@ -62,13 +65,14 @@ public class DetectCycleInInDirectGraph {
     }
 
     public static void main(String[] args) {
-        int n = 46;
+        int n = 2;
 
         DetectCycleInInDirectGraph g = new DetectCycleInInDirectGraph(n);
         g.addEdge(0, 1);
-        g.addEdge(1, 2);
-        g.addEdge(2, 3);
-        g.addEdge(3, 0);
+        g.addEdge(1, 0);
+//        g.addEdge(1, 2);
+//        g.addEdge(2, 3);
+//        g.addEdge(3, 1);
 
 
         System.out.println(g.isCyclic());
